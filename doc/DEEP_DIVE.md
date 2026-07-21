@@ -17,11 +17,11 @@ Read the whole document once before starting. Then come back and follow it stage
 | 4 | Retrieval: Dense + Sparse + RRF | DONE |
 | 5 | LLM Client: OpenRouter Wrapper | DONE |
 | 6 | Query Transformation | DONE |
-| 7 | Input Guardrails & PII Detection | TODO |
-| 8 | Corrective RAG (C-RAG) | TODO |
-| 9 | Response Generation & Formatting | TODO |
-| 10 | Pipeline Orchestration | TODO |
-| 11 | API Server | TODO |
+| 7 | Input Guardrails & PII Detection | DONE |
+| 8 | Corrective RAG (C-RAG) | DONE |
+| 9 | Response Generation & Formatting | DONE |
+| 10 | Pipeline Orchestration | DONE |
+| 11 | API Server | DONE |
 | 12 | End-to-End Verification | TODO |
 
 ---
