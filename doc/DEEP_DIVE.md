@@ -13,7 +13,7 @@ Read the whole document once before starting. Then come back and follow it stage
 | 0 | Project Setup & Infrastructure | DONE |
 | 1 | Data Ingestion: Parser | DONE |
 | 2 | Data Ingestion: Chunker | DONE |
-| 3 | Data Ingestion: Embedder & Indexer | TODO |
+| 3 | Data Ingestion: Embedder & Indexer | DONE |
 | 4 | Retrieval: Dense + Sparse + RRF | TODO |
 | 5 | LLM Client: OpenRouter Wrapper | TODO |
 | 6 | Query Transformation | TODO |
