@@ -14,7 +14,7 @@ Read the whole document once before starting. Then come back and follow it stage
 | 1 | Data Ingestion: Parser | DONE |
 | 2 | Data Ingestion: Chunker | DONE |
 | 3 | Data Ingestion: Embedder & Indexer | DONE |
-| 4 | Retrieval: Dense + Sparse + RRF | TODO |
+| 4 | Retrieval: Dense + Sparse + RRF | DONE |
 | 5 | LLM Client: OpenRouter Wrapper | TODO |
 | 6 | Query Transformation | TODO |
 | 7 | Input Guardrails & PII Detection | TODO |
