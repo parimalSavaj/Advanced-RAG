@@ -104,7 +104,7 @@ export async function gradeAllChunks(
 // ─── Quality Check ───────────────────────────────────────────────────────────
 
 /** Minimum number of RELEVANT chunks needed to pass quality threshold */
-const RELEVANCE_THRESHOLD = 5;
+const RELEVANCE_THRESHOLD = 3;
 
 /**
  * Checks whether the graded results meet the quality threshold.

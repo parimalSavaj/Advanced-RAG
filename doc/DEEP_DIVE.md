@@ -22,7 +22,7 @@ Read the whole document once before starting. Then come back and follow it stage
 | 9 | Response Generation & Formatting | DONE |
 | 10 | Pipeline Orchestration | DONE |
 | 11 | API Server | DONE |
-| 12 | End-to-End Verification | TODO |
+| 12 | End-to-End Verification | DONE |
 
 ---
 
