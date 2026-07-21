@@ -1,0 +1,29 @@
+{
+  "name": "advanced-rag",
+  "version": "1.0.0",
+  "description": "Advanced RAG pipeline for Udemy course subtitle Q&A",
+  "type": "module",
+  "scripts": {
+    "dev": "npx tsx watch api/server.ts",
+    "start": "npx tsx api/server.ts",
+    "ingest": "npx tsx scripts/ingest.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.12.0",
+    "@xenova/transformers": "^2.17.2",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.1",
+    "ioredis": "^5.4.2",
+    "openai": "^4.77.0",
+    "wink-bm25-text-search": "^3.1.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}

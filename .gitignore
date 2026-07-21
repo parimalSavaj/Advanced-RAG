@@ -1,2 +1,19 @@
+# Data
 /class_subtitle_lyst1784566935215
-/doc
+/data
+
+# Dependencies
+node_modules
+
+# Build
+dist
+
+# Environment
+.env
+
+# OS
+.DS_Store
+
+# IDE
+.vscode
+!.vscode/settings.json
