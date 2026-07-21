@@ -128,7 +128,6 @@ The module also needs a `parseLessonFolder` function. Given a lesson folder path
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/parser.test.ts` — all 12 tests must pass.
 
 **Manual verification — do these yourself:**
 
@@ -182,7 +181,6 @@ Each chunk object contains: `id` (string), `text` (string), `moduleName` (string
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/chunker.test.ts` — all 8 tests must pass.
 
 **Manual verification — do these yourself:**
 
@@ -266,7 +264,6 @@ The script also builds and saves a BM25 index. After all chunks are collected, i
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/indexer.test.ts`
 
 **Manual verification — do these yourself:**
 
@@ -361,7 +358,6 @@ RRF is a pure function — it takes lists and returns a list. It has no side eff
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/retrieval.test.ts`
 
 **Manual verification — do these yourself:**
 
@@ -441,7 +437,6 @@ Also expose a `countApproximateTokens(text)` helper that estimates token count a
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/openrouter.test.ts` (integration tests — need API key)
 
 **Manual verification — do these yourself:**
 
@@ -512,7 +507,6 @@ All three transformations run concurrently using `Promise.all` — they are inde
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/query.test.ts` (uses mocked LLM — no API key needed)
 
 **Manual verification — do these yourself (needs API key):**
 
@@ -590,7 +584,6 @@ The validator returns a typed result object. On success: `{ passed: true, proces
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/guardrails.test.ts` (uses mocked LLM — no API key needed)
 
 **Manual verification — do these yourself:**
 
@@ -663,7 +656,6 @@ If the loop exhausts all 3 attempts without passing the quality threshold, it re
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/crag.test.ts` (uses mocked LLM — no API key needed)
 
 **Manual verification — do these yourself (needs API key + ingested data):**
 
@@ -765,7 +757,6 @@ Sources:
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/generation.test.ts` (uses mocked LLM)
 
 **Manual verification — do these yourself (needs API key + ingested data):**
 
@@ -833,7 +824,6 @@ The pipeline function must not throw. Wrap the entire body in a try-catch. If an
 
 ### How to Verify
 
-**Automated tests:** `npx vitest run tests/pipeline.test.ts` (uses mocked modules)
 
 **Manual verification — do these yourself (needs API key + ingested data):**
 
@@ -974,25 +964,23 @@ If any scenario fails, trace back through the stage that owns that failure and f
 
 ---
 
-## Quick Reference: Build Order and Test Commands
+## Quick Reference: Build Order and Verification
 
-| Stage | Files Created | Automated Test | Manual Check |
-|-------|--------------|----------------|--------------|
-| 0 | `package.json`, `tsconfig.json`, `docker-compose.yml`, `.env.example`, `src/config.ts` | `npx tsx src/config.ts` | `curl http://localhost:6333/healthz` |
-| 1 | `src/ingestion/parser.ts` | `npx vitest run tests/parser.test.ts` | Run `parseLessonFolder` on a real folder, read the output |
-| 2 | `src/ingestion/chunker.ts` | `npx vitest run tests/chunker.test.ts` | Run chunker on a lesson, check timestamps and overlap |
-| 3 | `src/ingestion/embedder.ts`, `indexer.ts`, `scripts/ingest.ts` | `npm run ingest` | Open Qdrant dashboard, inspect points |
-| 4 | `src/retrieval/adapter.ts`, `dense-retriever.ts`, `sparse-retriever.ts`, `rrf.ts` | `npx vitest run tests/retrieval.test.ts` | Query dense + sparse manually, check result relevance |
-| 5 | `src/llm/openrouter.ts` | `npx vitest run tests/openrouter.test.ts` | Call `chat()` with "hello" prompt, confirm response |
-| 6 | `src/query/rewriter.ts`, `step-back.ts`, `sub-questions.ts` | `npx vitest run tests/query.test.ts` | Run each transformer on a real query, read output |
-| 7 | `src/guardrails/pii-detector.ts`, `input-validator.ts` | `npx vitest run tests/guardrails.test.ts` | Test PII masking + on/off topic check manually |
-| 8 | `src/crag/grader.ts`, `corrective-loop.ts` | `npx vitest run tests/crag.test.ts` | Grade a real chunk, run corrective loop on a real query |
-| 9 | `src/generation/generator.ts`, `formatter.ts` | `npx vitest run tests/generation.test.ts` | Generate answer for a real query, inspect citations |
-| 10 | `src/pipeline.ts` | `npx vitest run tests/pipeline.test.ts` | `runPipeline("question")` from terminal |
-| 11 | `api/server.ts` | — | `curl` the API endpoints |
-| 12 | — | — | Full scenario queries via curl |
-
-Run all automated tests at once: `npx vitest run`
+| Stage | Files Created | Manual Verification |
+|-------|--------------|---------------------|
+| 0 | `package.json`, `tsconfig.json`, `docker-compose.yml`, `.env.example`, `src/config.ts` | `curl http://localhost:6333/healthz` + `npx tsx src/config.ts` |
+| 1 | `src/ingestion/parser.ts` | Run `parseLessonFolder` on a real folder, inspect output |
+| 2 | `src/ingestion/chunker.ts` | Run chunker on a lesson, check timestamps and overlap |
+| 3 | `src/ingestion/embedder.ts`, `indexer.ts`, `scripts/ingest.ts` | `npm run ingest` then open Qdrant dashboard |
+| 4 | `src/retrieval/adapter.ts`, `dense-retriever.ts`, `sparse-retriever.ts`, `rrf.ts` | Query dense + sparse manually, check result relevance |
+| 5 | `src/llm/openrouter.ts` | Call `chat()` with "hello" prompt, confirm response |
+| 6 | `src/query/rewriter.ts`, `step-back.ts`, `sub-questions.ts` | Run each transformer on a real query, read output |
+| 7 | `src/guardrails/pii-detector.ts`, `input-validator.ts` | Test PII masking + on/off topic check |
+| 8 | `src/crag/grader.ts`, `corrective-loop.ts` | Grade a real chunk, run corrective loop on a real query |
+| 9 | `src/generation/generator.ts`, `formatter.ts` | Generate answer for a real query, inspect citations |
+| 10 | `src/pipeline.ts` | `runPipeline("question")` from terminal |
+| 11 | `api/server.ts` | `curl` the API endpoints |
+| 12 | — | Full scenario queries via curl |
 
 ---
 
