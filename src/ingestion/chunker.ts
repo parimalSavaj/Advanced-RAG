@@ -30,7 +30,7 @@ export function formatTimestamp(seconds: number): string {
 
 /**
  * Generates a deterministic chunk ID from module + lesson + chunk index.
- * Using MD5 hash truncated to 16 hex chars for compactness.
+ * Produces a valid UUID-formatted string from MD5 hash (required by Qdrant).
  */
 function generateChunkId(
   moduleName: string,
@@ -38,7 +38,9 @@ function generateChunkId(
   chunkIndex: number
 ): string {
   const input = `${moduleName}::${lessonName}::${chunkIndex}`;
-  return createHash("md5").update(input).digest("hex").slice(0, 16);
+  const hash = createHash("md5").update(input).digest("hex");
+  // Format as UUID: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  return `${hash.slice(0, 8)}-${hash.slice(8, 12)}-${hash.slice(12, 16)}-${hash.slice(16, 20)}-${hash.slice(20, 32)}`;
 }
 
 /**

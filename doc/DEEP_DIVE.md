@@ -16,7 +16,7 @@ Read the whole document once before starting. Then come back and follow it stage
 | 3 | Data Ingestion: Embedder & Indexer | DONE |
 | 4 | Retrieval: Dense + Sparse + RRF | DONE |
 | 5 | LLM Client: OpenRouter Wrapper | DONE |
-| 6 | Query Transformation | TODO |
+| 6 | Query Transformation | DONE |
 | 7 | Input Guardrails & PII Detection | TODO |
 | 8 | Corrective RAG (C-RAG) | TODO |
 | 9 | Response Generation & Formatting | TODO |

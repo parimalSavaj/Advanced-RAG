@@ -37,9 +37,10 @@ export class SparseRetriever implements Retriever {
 
     const dataDir = join(process.cwd(), "data");
 
-    // Load BM25 index
+    // Load BM25 index — must define config and prep tasks before import
     const bm25Data = readFileSync(join(dataDir, "bm25-index.json"), "utf-8");
     this.engine = bm25();
+    this.engine.defineConfig({ fldWeights: { text: 1 } });
     this.engine.definePrepTasks([tokenize]);
     this.engine.importJSON(JSON.parse(bm25Data));
 
